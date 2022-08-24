@@ -66,7 +66,7 @@
     "chai": "^4.3.4",
     "eslint": "^7.32.0",
     "eslint-plugin-html": "^6.2.0",
-    "eslint-plugin-jsdom-internal": "link:./scripts/eslint-plugin",
+    "eslint-plugin-jsdom-internal": "file:./scripts/eslint-plugin",
     "js-yaml": "^4.1.0",
     "karma": "^6.3.4",
     "karma-browserify": "^8.1.0",
@@ -89,8 +89,6 @@
     "./lib/jsdom/living/websockets/WebSocket-impl.js": "./lib/jsdom/living/websockets/WebSocket-impl-browser.js"
   },
   "scripts": {
-    "prepare": "yarn convert-idl && yarn generate-js-globals",
-    "pretest": "yarn prepare && yarn init-wpt",
     "test-wpt": "mocha test/web-platform-tests/run-wpts.js",
     "test-tuwpt": "mocha test/web-platform-tests/run-tuwpts.js",
     "test-mocha": "mocha",
@@ -98,10 +96,8 @@
     "test": "mocha test/index.js",
     "test-browser-iframe": "karma start test/karma.conf.js",
     "test-browser-worker": "karma start test/karma-webworker.conf.js",
-    "test-browser": "yarn test-browser-iframe && yarn test-browser-worker",
     "lint": "eslint . --cache --ext .js,.html",
     "init-wpt": "git submodule update --init --recursive",
-    "reset-wpt": "rimraf ./test/web-platform-tests/tests && yarn init-wpt",
     "update-wpt": "git submodule update --recursive --remote && cd test/web-platform-tests/tests && python3 wpt.py manifest --path ../wpt-manifest.json",
     "update-authors": "git log --format=\"%aN <%aE>\" | sort -f | uniq > AUTHORS.txt",
     "benchmark": "node ./benchmark/runner",
